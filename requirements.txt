@@ -1,0 +1,9 @@
+fastapi 
+uvicorn
+langchain-community
+ollama
+python-multipart 
+pdf2image 
+pdfplumber 
+fastembed 
+chromadb
