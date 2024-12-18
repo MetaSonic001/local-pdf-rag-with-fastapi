@@ -1,3 +1,5 @@
+# this is a flask application for initial testing, not to be run for production
+
 from flask import Flask, request
 from langchain_community.llms import Ollama
 from langchain_community.vectorstores import Chroma
