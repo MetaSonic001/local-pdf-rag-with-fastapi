@@ -13,11 +13,13 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain.prompts import PromptTemplate
 
+
 # Create FastAPI app
 app = FastAPI(
     title="PDF Q&A LLM API",
     description="API for PDF document querying using Mistral LLM",
-    version="1.0.0"
+    version="1.0.0",
+    docs_url="/docs",  # Swagger UI
 )
 
 # Add CORS middleware
@@ -168,5 +170,12 @@ async def upload_pdf(file: UploadFile = File(...)):
 async def health_check():
     return {"status": "healthy"}
 
-# Note: For deployment, you'll want to use something like uvicorn to run the server
-# uvicorn main:app --host 0.0.0.0 --port 8080
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the PDF Q&A API"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))  # Default to 8000 for local testing
+    uvicorn.run(app, host="0.0.0.0", port=port)
